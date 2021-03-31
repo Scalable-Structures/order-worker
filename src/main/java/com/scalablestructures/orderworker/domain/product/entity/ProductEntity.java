@@ -1,4 +1,4 @@
-package com.scalablestructures.orderworker.domain.order.entity;
+package com.scalablestructures.orderworker.domain.product.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,10 +8,11 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class OrderProductEntity {
+public class ProductEntity {
     private UUID id;
-    private String description;
+    private String name;
+    private Double value;
 }
