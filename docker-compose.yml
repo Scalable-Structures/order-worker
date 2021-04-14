@@ -6,3 +6,12 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+  database:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: order-worker
+      MYSQL_DATABASE: order
+      MYSQL_USER: order-worker
+      MYSQL_PASSWORD: order-worker
+    ports:
+      - "3306:3306"

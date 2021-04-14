@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,6 +15,9 @@ import java.util.UUID;
 @Builder
 public class OrderEntity {
     private UUID id;
-    private OrderCustomerEntity customer;
+    private UUID customerId;
+    private Date date;
+    private Boolean status;
+    private Double value;
     private List<OrderItemEntity> items;
 }
