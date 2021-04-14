@@ -1,6 +1,5 @@
 package com.scalablestructures.orderworker.domain.order.entity;
 
-import com.scalablestructures.orderworker.domain.product.entity.ProductEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,8 +13,8 @@ import java.util.UUID;
 @Builder
 public class OrderItemEntity {
     private UUID id;
-    private OrderEntity order;
-    private ProductEntity product;
+    private UUID orderId;
+    private UUID productId;
     private Integer quantity;
     private Double unitValue;
 }
