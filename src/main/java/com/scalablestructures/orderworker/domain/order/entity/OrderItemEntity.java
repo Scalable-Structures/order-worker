@@ -14,7 +14,7 @@ import java.util.UUID;
 public class OrderItemEntity {
     private UUID id;
     private UUID orderId;
-    private UUID productId;
+    private OrderItemProductEntity product;
     private Integer quantity;
     private Double unitValue;
 }
