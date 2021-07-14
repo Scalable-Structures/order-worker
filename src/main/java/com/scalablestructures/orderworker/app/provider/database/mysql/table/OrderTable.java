@@ -45,7 +45,7 @@ public class OrderTable {
     public OrderTable fromDomain(OrderEntity orderEntity) {
         return OrderTable.builder()
             .id(id)
-            .customerId(orderEntity.getCustomerId())
+            .customerId(orderEntity.getCustomer().getId())
             .date(orderEntity.getDate())
             .status(orderEntity.getStatus())
             .value(orderEntity.getValue())

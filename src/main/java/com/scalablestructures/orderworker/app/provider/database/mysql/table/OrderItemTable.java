@@ -35,7 +35,7 @@ public class OrderItemTable {
         return OrderItemTable.builder()
             .id(id)
             .order(OrderTable.builder().id(orderId).build())
-            .productId(orderItemEntity.getProductId())
+            .productId(orderItemEntity.getProduct().getId())
             .quantity(orderItemEntity.getQuantity())
             .unitValue(orderItemEntity.getUnitValue())
             .build();
