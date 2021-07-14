@@ -3,6 +3,11 @@ application:
   name: '@pom.name@'
   description: '@pom.description@'
   version: '@pom.version@'
+  rabbitmq:
+    exchange:
+      name: ${APPLICATION_RABBITMQ_EXCHANGE_NAME:order-exchange}
+    queue:
+      name: ${APPLICATION_RABBITMQ_QUEUE_NAME:order-queue}
 
 spring:
   datasource:
