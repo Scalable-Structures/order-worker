@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class OrderCustomerMessage {
-    private UUID id;
+    private String id;
 
     public OrderCustomerEntity toDomain(OrderCustomerMessage orderCustomerMessage) {
         return OrderCustomerEntity.builder()

@@ -12,5 +12,5 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class OrderItemProductEntity {
-    private UUID id;
+    private String id;
 }

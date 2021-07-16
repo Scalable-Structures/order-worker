@@ -23,6 +23,6 @@ public class WorkerConsumerQueueOrder {
     public void execute(@Payload String body) {
         OrderMessage orderMessage = new Gson().fromJson(body, OrderMessage.class);
 
-        System.out.println(orderMessage.toString());
+        this.orderCreateInteractor.execute(new OrderMessage().toDomain(orderMessage));
     }
 }

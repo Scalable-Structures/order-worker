@@ -5,19 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class OrderEntity {
-    private UUID id;
+    private String id;
     private OrderCustomerEntity customer;
-    private Date date;
-    private Boolean status;
-    private Double value;
+    private LocalDateTime date;
+    private String status;
+    private Double amount;
     private List<OrderItemEntity> items;
 }
