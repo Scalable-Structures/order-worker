@@ -11,19 +11,19 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "order_item")
-public class OrderItemTable {
+@Table(name = "orders_items")
+public class OrdersItemsTable {
     @Id
-    private UUID id = UUID.randomUUID();
+    private String id = UUID.randomUUID().toString();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JoinColumn(name = "order_id", nullable = false)
-    private OrderTable order;
+    private OrdersTable order;
 
     @Column(name = "product_id")
-    private UUID productId;
+    private String productId;
 
     @Column
     private Integer quantity;
@@ -31,10 +31,10 @@ public class OrderItemTable {
     @Column(name = "unit_value")
     private Double unitValue;
 
-    public OrderItemTable fromDomain(UUID orderId, OrderItemEntity orderItemEntity) {
-        return OrderItemTable.builder()
+    public OrdersItemsTable fromDomain(String orderId, OrderItemEntity orderItemEntity) {
+        return OrdersItemsTable.builder()
             .id(id)
-            .order(OrderTable.builder().id(orderId).build())
+            .order(OrdersTable.builder().id(orderId).build())
             .productId(orderItemEntity.getProduct().getId())
             .quantity(orderItemEntity.getQuantity())
             .unitValue(orderItemEntity.getUnitValue())
