@@ -17,6 +17,6 @@ public class OrderEntity {
     private OrderCustomerEntity customer;
     private LocalDateTime date;
     private String status;
-    private Double amount;
+    private Double value;
     private List<OrderItemEntity> items;
 }

@@ -20,7 +20,7 @@ public class OrderMessage {
     private OrderCustomerMessage customer;
     private String date;
     private String status;
-    private Double amount;
+    private Double value;
     private List<OrderItemMessage> items;
 
     public OrderEntity toDomain(OrderMessage orderMessage) {
@@ -31,7 +31,7 @@ public class OrderMessage {
             .customer(new OrderCustomerMessage().toDomain(orderMessage.getCustomer()))
             .date(formattedDate)
             .status(orderMessage.getStatus())
-            .amount(orderMessage.getAmount())
+            .value(orderMessage.getValue())
             .items(
                 orderMessage.getItems().stream()
                     .map(item -> new OrderItemMessage().toDomain(item))

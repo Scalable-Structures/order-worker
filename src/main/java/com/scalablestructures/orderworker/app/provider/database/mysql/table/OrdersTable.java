@@ -33,7 +33,7 @@ public class OrdersTable {
     private String status;
 
     @Column
-    private Double amount;
+    private Double value;
 
     @OneToMany(
         mappedBy = "order",
@@ -48,7 +48,7 @@ public class OrdersTable {
             .customerId(orderEntity.getCustomer().getId())
             .date(orderEntity.getDate())
             .status(orderEntity.getStatus())
-            .amount(orderEntity.getAmount())
+            .value(orderEntity.getValue())
             .items(
                 orderEntity.getItems().stream()
                     .map(item -> new OrdersItemsTable().fromDomain(id, item))
