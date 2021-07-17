@@ -14,16 +14,15 @@ import java.util.UUID;
 @Table(name = "orders_items")
 public class OrdersItemsTable {
     @Id
-    private String id = UUID.randomUUID().toString();
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @JoinColumn(name = "order_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "order_id")
     private OrdersTable order;
 
     @Column(name = "product_id")
-    private String productId;
+    private Long productId;
 
     @Column
     private Integer quantity;
@@ -31,10 +30,9 @@ public class OrdersItemsTable {
     @Column(name = "unit_value")
     private Double unitValue;
 
-    public OrdersItemsTable fromDomain(String orderId, OrderItemEntity orderItemEntity) {
+    public OrdersItemsTable fromDomain(OrderItemEntity orderItemEntity, OrdersTable order) {
         return OrdersItemsTable.builder()
-            .id(id)
-            .order(OrdersTable.builder().id(orderId).build())
+            .order(order)
             .productId(orderItemEntity.getProduct().getId())
             .quantity(orderItemEntity.getQuantity())
             .unitValue(orderItemEntity.getUnitValue())

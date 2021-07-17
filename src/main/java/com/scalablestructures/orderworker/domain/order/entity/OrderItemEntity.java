@@ -12,8 +12,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class OrderItemEntity {
-    private String id;
-    private String orderId;
+    private Long id;
+    private Long orderId;
     private OrderItemProductEntity product;
     private Integer quantity;
     private Double unitValue;

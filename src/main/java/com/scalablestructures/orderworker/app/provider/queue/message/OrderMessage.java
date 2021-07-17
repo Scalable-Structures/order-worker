@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +19,7 @@ public class OrderMessage {
     private OrderCustomerMessage customer;
     private String date;
     private String status;
-    private Double value;
+    private Double amount;
     private List<OrderItemMessage> items;
 
     public OrderEntity toDomain(OrderMessage orderMessage) {
@@ -31,7 +30,7 @@ public class OrderMessage {
             .customer(new OrderCustomerMessage().toDomain(orderMessage.getCustomer()))
             .date(formattedDate)
             .status(orderMessage.getStatus())
-            .value(orderMessage.getValue())
+            .amount(orderMessage.getAmount())
             .items(
                 orderMessage.getItems().stream()
                     .map(item -> new OrderItemMessage().toDomain(item))

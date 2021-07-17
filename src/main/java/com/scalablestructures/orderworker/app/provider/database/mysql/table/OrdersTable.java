@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Data
@@ -21,10 +20,11 @@ import java.util.stream.Collectors;
 @Table(name = "orders")
 public class OrdersTable {
     @Id
-    private String id = UUID.randomUUID().toString();
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "customer_id")
-    private String customerId;
+    private Long customerId;
 
     @Column
     private LocalDateTime date;
@@ -38,21 +38,21 @@ public class OrdersTable {
     @OneToMany(
         mappedBy = "order",
         fetch = FetchType.LAZY,
-        cascade = {CascadeType.MERGE,
-            CascadeType.PERSIST})
-    private List<OrdersItemsTable> items;
+        cascade = {CascadeType.ALL})
+    private List<OrdersItemsTable> items = new ArrayList<>();
 
     public OrdersTable fromDomain(OrderEntity orderEntity) {
-        return OrdersTable.builder()
-            .id(id)
+        OrdersTable ordersTable = OrdersTable.builder()
             .customerId(orderEntity.getCustomer().getId())
             .date(orderEntity.getDate())
             .status(orderEntity.getStatus())
-            .value(orderEntity.getValue())
-            .items(
-                orderEntity.getItems().stream()
-                    .map(item -> new OrdersItemsTable().fromDomain(id, item))
-                    .collect(Collectors.toList()))
+            .value(orderEntity.getAmount())
             .build();
+
+        ordersTable.setItems(orderEntity.getItems().stream()
+            .map(item -> new OrdersItemsTable().fromDomain(item, ordersTable))
+            .collect(Collectors.toList()));
+
+        return ordersTable;
     }
 }

@@ -13,10 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class OrderEntity {
-    private String id;
+    private Long id;
     private OrderCustomerEntity customer;
     private LocalDateTime date;
     private String status;
-    private Double value;
+    private Double amount;
     private List<OrderItemEntity> items;
 }
