@@ -10,6 +10,8 @@ application:
       name: ${APPLICATION_RABBITMQ_QUEUE_NAME:order-queue}
 
 spring:
+  rabbitmq:
+    host: ${SPRING_RABBITMQ_HOST:localhost}
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:mysql://${SPRING_DATASOURCE_HOST:localhost}:${SPRING_DATASOURCE_PORT:3306}/${SPRING_DATASOURCE_DBNAME:order}}
     username: ${SPRING_DATASOURCE_USERNAME:order-worker}
