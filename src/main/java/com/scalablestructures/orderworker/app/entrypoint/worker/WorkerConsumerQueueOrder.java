@@ -19,7 +19,10 @@ public class WorkerConsumerQueueOrder {
         this.orderCreateInteractor = orderCreateInteractor;
     }
 
-    @RabbitListener(queues = "${application.rabbitmq.queue.name}")
+    @RabbitListener(
+        queues = "${application.rabbitmq.queue.name}",
+        containerFactory = "prefetchRabbitListenerContainerFactory"
+    )
     public void execute(@Payload String body) {
         OrderMessage orderMessage = new Gson().fromJson(body, OrderMessage.class);
 

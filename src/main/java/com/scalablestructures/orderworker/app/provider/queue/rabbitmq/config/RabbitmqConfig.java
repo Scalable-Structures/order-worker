@@ -2,6 +2,10 @@ package com.scalablestructures.orderworker.app.provider.queue.rabbitmq.config;
 
 import ch.qos.logback.classic.pattern.MessageConverter;
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.listener.RabbitListenerContainerFactory;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -53,5 +57,14 @@ public class RabbitmqConfig {
             .to(this.declareExchange())
             .with(this.queueName + ".dlq")
             .noargs();
+    }
+
+    @Bean
+    public RabbitListenerContainerFactory<SimpleMessageListenerContainer>
+        prefetchRabbitListenerContainerFactory(ConnectionFactory rabbitConnectionFactory) {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(rabbitConnectionFactory);
+        factory.setPrefetchCount(100);
+        return factory;
     }
 }
